@@ -16,7 +16,7 @@ function excludeElement(arr, elm) {
 }
 
 describe('New Game', function () {
-	it('Shoud return the game object with id and firstPlayer', function () {
+	it('Shoud return the GAME OBJECT WITH ID AND FIRSTPLAYER', function () {
 		const game = gc.newGame();
 		
 		expect(game).to.be.an('object');
@@ -25,54 +25,66 @@ describe('New Game', function () {
 		expect(['X', 'O']).to.include(game.firstPlayer);		
 	});
 
-	it('Shoud not throw exception on first movement', function () {
+	it('Shoud NOT THROW EXCEPTION ON FIRST MOVEMENT', function () {
 		const game = gc.newGame();
 		gc.movement(game.id, game.firstPlayer, 0, 0);
 	});
+	
+	it('Should warning about the WRONG PLAYER TURN ', function () {
+		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, (game.firstPlayer == 'X' ? 'O' : 'X'), 0, 0);
+		}).to.throw('Não é turno do jogador');
+		
+	});
 
 });
-/*
+
 describe('Missing API field', function () {
-	it('Should warning about the wrong player turn ', function () {
+	
+	it('Should warning about the MISSING ID field', function () {
 		const game = gc.newGame();
-		// fazer primeira jogada errada
-		// deve retornar erro
+		
+		expect(function() {
+			gc.movement(null, game.firstPlayer, 0, 0);
+		}).to.throw('id faltando');
+		
 	});
 
-	it('Should warning about the missing id field', function () {
+	it('Should warning about the MISSING PLAYER field', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, null, 0, 0);
+		}).to.throw('player faltando');
 	});
 
-	it('Should warning about the missing player field', function () {
+	it('Should warning about the MISSING X position field', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, game.firstPlayer, null, 0);
+		}).to.throw('x faltando ou incorreto');
 	});
 
-	it('Should warning about the missing position field', function () {
+	it('Should warning about the MISSING Y position field', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, game.firstPlayer, 0, null);
+		}).to.throw('y faltando ou incorreto');
 	});
 
-	it('Should warning about the missing position X field', function () {
-		const game = gc.newGame();
-	});
-
-	it('Should warning about the missing position Y field', function () {
-		const game = gc.newGame();
-	});
-
-	it('Should warning missing player field', function () {
-		const game = gc.newGame();
-	});
-	it('Should warning missing player field', function () {
-		const game = gc.newGame();
-	});
 });
 
+/*
 describe('Invalid values field on API call', function () {
 	it('Should warning about the wrong id / missing game', function () {
 		const game = gc.newGame();
 	});
 
-	it('Should warning about the wrong player turn', function () {
+	it('Should warning about the wrong player value', function () {
 		const game = gc.newGame();
 	});
 

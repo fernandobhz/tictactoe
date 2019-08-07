@@ -133,6 +133,18 @@ exports.listGames = function() {
 exports.movement = function(id, player, x, y) {
 	var game = games.find(x => x.id == id);
 
+	if ( ! id ) 
+		throw new Error('id faltando');
+	
+	if ( ! player ) 
+		throw new Error('player faltando');
+	
+	if ( ! [0,1,2].includes(x) ) 
+		throw new Error('x faltando ou incorreto');
+	
+	if ( ! [0,1,2].includes(y) )
+		throw new Error('y faltando ou incorreto');
+	
 	if ( ! game ) 
 		throw new Error('Partida não encontrada');		
 	
