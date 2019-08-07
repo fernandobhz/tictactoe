@@ -171,14 +171,33 @@ describe('Gaming simulation', function () {
 											var v9 = p9[i9];		
 											
 											var game = gc.newGame();
-											
-											
-											
-											game.movement(req
-											console.log(v1,v2,v3,v4,v5,v6,v7,v8,v9);	
-											
-											count++;
-											if ( count == limit ) throw Error('stop');
+																						
+											gc.movement(game.id, game.player, v1.x, v1.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v2.x, v2.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v3.x, v3.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v4.x, v4.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v5.x, v5.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v6.x, v6.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v7.x, v7.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v8.x, v8.y)
+											game.player = (player == 'X' ? 'O' : 'X');
+																						
+											gc.movement(game.id, game.player, v9.x, v9.y)
+											game.player = (player == 'X' ? 'O' : 'X');
 										}								
 									}
 								}
