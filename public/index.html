@@ -80,7 +80,7 @@
 			var y = $(elm).attr("data-y");
 
 			$(elm).html(currentPlayer);
-
+			
 			var postUrl = "/game/" + window.game.id + "/movement";
 			
 			var postData = JSON.stringify({
@@ -98,7 +98,10 @@
 				
 				if ( window.currentPlayer == 'X' ) window.currentPlayer = 'O'
 				else window.currentPlayer = 'X';
-			});			
+			}).fail(function(xhr, txtStatus, error) {
+				$("#responseCode").html(xhr.status + " - " + txtStatus);
+				$("#responseData").html(xhr.responseText);
+			});
 		}
 	</script>
 
