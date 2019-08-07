@@ -6,6 +6,9 @@
 		.movementButton {
 			width: 100%;
 			height: 20vh;
+			font-weight: bold;
+			font-size: 18pt;
+			font-color: blue;
 		}
 
 		td {
@@ -87,6 +90,9 @@
 			var y = $(elm).attr("data-y");
 
 			$(elm).html(currentPlayer);
+			
+			if ( window.currentPlayer == 'X' ) $(elm).css('color', 'red')
+			else $(elm).css('color', 'blue');
 			
 			var postUrl = "/game/" + window.game.id + "/movement";
 			

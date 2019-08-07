@@ -13,3 +13,5 @@ npm start
 Apesar de não solicitado, desenvolvi um front-end bem simples
 para testar a api, basta acessar o browser em http://localhost:3000
 
+# git
+https://gitlab.com/fernandobhz/tictactoe

@@ -27,6 +27,8 @@ function gameFactory() {
 }
 
 function checkWinner(game) {
+	if ( game.valid == false ) return false;
+	
 	var player = game.previousPlayer;
 	
 	// HORIZONTAL LINES
@@ -101,7 +103,16 @@ function checkWinner(game) {
 }
 
 function checkDraw(game) {
+	if ( game.valid == false ) return false;
 	
+	// To be a draw, every field must be different than null
+	for ( key in game.table ) {
+		if ( game.table[key] == null ) {
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 
@@ -204,6 +215,8 @@ exports.movement = function(req, res, next) {
 			msg: 'Partida finalizada',
 			winner: game.previousPlayer
 		});
+		
+		game.valid = false;
 		return;
 	}
 	
@@ -215,12 +228,14 @@ exports.movement = function(req, res, next) {
 			status: 'Partida finalizada',
 			winner: 'Draw'
 		});
+		
+		game.valid = false;
 		return;
 	}
 	
 	
 	// Returning the current game object for client	
-	res.status(200).end();
-	//res.json(game);
+	//res.status(200).end();
+	res.json(game);
 	return;
 }
