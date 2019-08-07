@@ -19,8 +19,12 @@ router.post('/:id/movement', function(req, res, next) {
 		res.status(500).json({msg: 'O ID do jogo na url não corresponde ao ID passado na corpo da requisição'});
 		return;
 	}
-		
-	res.json( gameController.movement(id, player, x, y) );
+	
+	try {
+		res.json( gameController.movement(id, player, x, y) );
+	} catch(ex) {
+		res.status(500).json({msg: ex.message});	
+	}
 });
 
 module.exports = router;

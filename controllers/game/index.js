@@ -127,56 +127,35 @@ exports.listGames = function() {
 }
 
 exports.movement = function(id, player, x, y) {
-	// Received parameters
-	var { id, player, position } = req.body;
-	var { x, y } = position;
-	
 	var game = games.find(x => x.id == req.params.id);
 
-	if ( ! game ) {
-		res.status(500).json({msg: 'Partida não encontrada'});
-		return;
-	}
+	if ( ! game ) 
+		throw new Error('Partida não encontrada');		
 	
-	if ( game.valid == false ) {
-		res.status(500).json({msg: 'Este jogo não é valido'});
-		return;
-	}
+	if ( game.valid == false ) 
+		throw new Error('Este jogo não é valido');
 
-	if ( player != 'X' && player != 'O' ) {
-		res.status(500).json({msg: 'Jogador deve ser X ou O, recebido: ' + player});
-		return;
-	}
+	if ( player != 'X' && player != 'O' ) 
+		throw new Error('Jogador deve ser X ou O, recebido: ' + player);
 
-	if ( player != game.nextPlayer ) {
-		res.status(500).json({msg: 'Não é turno do jogador'});
-		return;
-	}
+	if ( player != game.nextPlayer )
+		throw new Error('Não é turno do jogador');
 
-	if ( x > 2 ) {
-		res.status(500).json({msg: 'O valor de x deve ser menor ou igual a 2, recebido: ' + x});
-		return;
-	}
+	if ( x > 2 )
+		throw new Error('O valor de x deve ser menor ou igual a 2, recebido: ' + x);
 
-	if ( y > 2 ) {
-		res.status(500).json({msg: 'O valor de y deve ser menor ou igual a 2, recebido:' + y});
-		return;
-	}
+	if ( y > 2 )
+		throw new Error('O valor de y deve ser menor ou igual a 2, recebido:' + y);
 
-	if ( x < 0 ) {
-		res.status(500).json({msg: 'O valor de x deve ser maior que 0, recebido: ' + x});
-		return;
-	}
+	if ( x < 0 )
+		throw new Error('O valor de x deve ser maior que 0, recebido: ' + x);
 
-	if ( y < 0 ) {
-		res.status(500).json({msg: 'O valor de y deve ser maior que 0, recebido: ' + y});
-		return;
-	}
+	if ( y < 0 )
+		throw new Error('O valor de y deve ser maior que 0, recebido: ' + y);
 	
 	if ( game.table['x' + x + 'y' + y] != null) {
-		res.status(500).json({msg: 'Esta jogada já foi feita, contate o suporte do front-end'});
 		game.valid = false;
-		return;
+		throw new Error('Esta jogada já foi feita, contate o suporte do front-end');
 	}
 	
 	
@@ -190,7 +169,7 @@ exports.movement = function(id, player, x, y) {
 		game.nextPlayer = 'X'
 	}	else {
 		// extra validation, theoretically not needed
-		res.status(500).json({msg: 'Erro interno, contate o suporte'});
+		throw new Error('Erro interno, contate o suporte');
 		return;
 	}
 	
@@ -203,31 +182,25 @@ exports.movement = function(id, player, x, y) {
 	
 	// Cheking if current player has won
 	if ( checkWinner(game) ) {
-		res.json({
+		game.valid = false;
+		
+		return {
 			msg: 'Partida finalizada',
 			winner: game.previousPlayer
-		});
-		
-		game.valid = false;
-		return;
+		}
 	}
 	
 	
 	
 	// Check if game finished by draw
 	if ( checkDraw(game) ) {
-		res.json({
+		game.valid = false;
+		
+		return {
 			status: 'Partida finalizada',
 			winner: 'Draw'
-		});
-		
-		game.valid = false;
-		return;
+		}		
 	}
-	
-	
-	// Returning the current game object for client	
-	//res.status(200).end();
-	res.json(game);
-	return;
+		
+	return game	
 }
