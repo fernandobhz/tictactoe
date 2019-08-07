@@ -24,15 +24,11 @@ describe('New Game', function () {
 		expect(game.id.length).to.be.equal(36);		
 		expect(['X', 'O']).to.include(game.firstPlayer);		
 	});
-/*
-	it('Shoud return the object after ther first movement', function () {
-		const game = gc.newGame();
 
-		// ter do tipo objeto
-		// id ser de 36 caracteres
-		// firstPlayer ser X ou O
+	it('Shoud not throw exception on first movement', function () {
+		const game = gc.newGame();
+		gc.movement(game.id, game.firstPlayer, 0, 0);
 	});
-	*/
 
 });
 /*

@@ -131,7 +131,7 @@ exports.listGames = function() {
 }
 
 exports.movement = function(id, player, x, y) {
-	var game = games.find(x => x.id == req.params.id);
+	var game = games.find(x => x.id == id);
 
 	if ( ! game ) 
 		throw new Error('Partida não encontrada');		
