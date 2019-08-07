@@ -16,6 +16,12 @@
 			width: 80%;
 			margin: 0 auto;
 		}
+		
+		#nextPlayerBox {
+			color: red;
+			margin-left: 300px;
+			font-weight: bold;
+		}
 	</style>
 </head>
 
@@ -23,9 +29,10 @@
 	<div class="center">
 		<h1 style="text-align: center">Tic Tac Toe Testing Front-end</h1>
 		GameId: <span id="gameId"></span>,
-		First Player: <span id="firstPlayer"></span><br>
-		<br>
-		<hr>
+		First Player: <span id="firstPlayer"></span>
+		<span id="nextPlayerBox">Next Player: <span id="nextPlayer"></span><br />
+		<br />
+		<hr />
 	</div>
 
 	<table class="center">
@@ -71,7 +78,7 @@
 				window.currentPlayer = data.firstPlayer;
 
 				$("#gameId").html(data.id);
-				$("#firstPlayer").html(data.firstPlayer);
+				$("#firstPlayer").html(data.firstPlayer);				
 			});
 		}
 
@@ -95,17 +102,16 @@
 			$.post(postUrl, postData, function(data, txtStatus, xhr) {				
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
 				$("#responseData").html(JSON.stringify(data, null, 4));
+				$("#nextPlayer").html(data.nextPlayer);
 				
 				if ( window.currentPlayer == 'X' ) window.currentPlayer = 'O'
 				else window.currentPlayer = 'X';
 			}).fail(function(xhr, txtStatus, error) {
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
-				$("#responseData").html(JSON.stringify(xhr.responseJSON, null, 4));
-				window.xhr = xhr;
+				$("#responseData").html(JSON.stringify(xhr.responseJSON, null, 4));				
 			});
 		}
 	</script>
 
-	
 </body>
 </html>
