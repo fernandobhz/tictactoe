@@ -21,7 +21,6 @@
 		}
 		
 		#nextPlayerBox {
-			color: red;
 			margin-left: 300px;
 			font-weight: bold;
 		}
@@ -81,7 +80,15 @@
 				window.currentPlayer = data.firstPlayer;
 
 				$("#gameId").html(data.id);
-				$("#firstPlayer").html(data.firstPlayer);				
+				$("#firstPlayer").html(data.firstPlayer);
+				
+				if ( data.firstPlayer == 'X' ) {
+					$("#nextPlayer").html('X');
+					$("#nextPlayer").css('color', 'red');
+				} else { 
+					$("#nextPlayer").html('O');
+					$("#nextPlayer").css('color', 'blue');
+				}
 			});
 		}
 
@@ -108,7 +115,13 @@
 			$.post(postUrl, postData, function(data, txtStatus, xhr) {				
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
 				$("#responseData").html(JSON.stringify(data, null, 4));
+				
 				$("#nextPlayer").html(data.nextPlayer);
+				if ( data.nextPlayer == 'X' ) {
+					$("#nextPlayer").css('color', 'red');
+				} else { 
+					$("#nextPlayer").css('color', 'blue');
+				}				
 				
 				if ( window.currentPlayer == 'X' ) window.currentPlayer = 'O'
 				else window.currentPlayer = 'X';
