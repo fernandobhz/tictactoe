@@ -55,6 +55,10 @@
 
 	<script src="/jquery-3.4.1.min.js"></script>
 	<script>
+		$.ajaxSetup({
+			contentType: "application/json; charset=utf-8"
+		});
+		
 		$(function() {
 			$(".movementButton").each(function() {
 				$(this).html($(this).attr("data-x") + ', ' + $(this).attr("data-y"));
@@ -79,14 +83,14 @@
 
 			var postUrl = "/game/" + window.game.id + "/movement";
 			
-			var postData = {
+			var postData = JSON.stringify({
 				"id" : window.game.id,
 				"player": window.currentPlayer,
 				"position": {
 					"x": x,
 					"y": y
 				}
-			}
+			});
 
 			$.post(postUrl, postData, function(data, txtStatus, xhr) {				
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
