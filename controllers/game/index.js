@@ -39,49 +39,44 @@ exports.movement = function(req, res, next) {
 	var { x, y } = position;
 	
 	if ( id != req.params.id ) {
-		res.status(500).send('Url ID does not match the body ID');
+		res.status(500).json({msg: 'O ID do jogo na url não corresponde ao ID passado na corpo da requisição'});
 		return;
 	}
 
 	var game = games.find(x => x.id == req.params.id);
 
 	if ( ! game ) {
-		res.status(500).send('Could not found the game by the id provided');
+		res.status(500).json({msg: 'Partida não encontrada'});
 		return;
 	}
 	
 	if ( player != 'X' or player != 'O' ) {
-		res.status(500).send('Player must be O or X');
+		res.status(500).json({msg: 'Player must be O or X'});
 		return;
 	}
 	
 	if ( x > 2 ) {
-		res.status(500).send('x value must be equal or less then 2');
+		res.status(500).json({msg: 'O valor de x deve ser menor ou igual a 2');
 		return;		
 	}
 	
 	if ( y > 2 ) {
-		res.status(500).send('y value must be equal or less then 2');
+		res.status(500).send('O valor de y deve ser menor ou igual a 2');
 		return;		
 	}
 	
 	if ( x < 0 ) {
-		res.status(500).send('x value must greater then 0');
+		res.status(500).send('O valor de x deve ser maior que 0');
 		return;		
 	}
 	
 	if ( y < 0 ) {
-		res.status(500).send('y value must greater then 0');
+		res.status(500).send('O valor de y deve ser maior que 0');
 		return;		
 	}
 	
 	game.table['x' + x + 'y' + y] = player;
 	
-
 	res.json(game);
 	return;
-
-	req.body.method = 'movement';
-	req.body.id = req.params.id;
-	res.json(req.body);
 }

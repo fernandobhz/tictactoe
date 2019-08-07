@@ -100,7 +100,7 @@
 				else window.currentPlayer = 'X';
 			}).fail(function(xhr, txtStatus, error) {
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
-				$("#responseData").html(xhr.responseText);
+				$("#responseData").html(JSON.stringify(xhr.responseObject, null, 4));
 			});
 		}
 	</script>
