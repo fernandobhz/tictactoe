@@ -108,7 +108,7 @@
 				else window.currentPlayer = 'X';
 			}).fail(function(xhr, txtStatus, error) {
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
-				$("#responseData").html(JSON.stringify(xhr.responseJSON, null, 4));				
+				$("#responseData").html(JSON.stringify(xhr.responseJSON, null, 4) + xhr.responseText);				
 			});
 		}
 	</script>

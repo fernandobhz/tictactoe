@@ -1,7 +1,6 @@
 const uuidv4 = require('uuid/v4');
 
 var games = [];
-var winPossibilities = [{x:0, y:1}];
 
 function gameFactory() {
 	var game = {};
@@ -26,6 +25,85 @@ function gameFactory() {
 
 	return game;
 }
+
+function checkWinner(game) {
+	var player = game.previousPlayer;
+	
+	// HORIZONTAL LINES
+	if ( // making the BOTTOM HORIZONTAL line
+		game.table['x0y0'] == player
+							&&
+		game.table['x1y0'] == player
+							&&
+		game.table['x2y0'] == player
+	) return true;
+	
+	if ( // making the MIDDLE HORIZONTAL line
+		game.table['x0y1'] == player
+							&&
+		game.table['x1y1'] == player
+							&&
+		game.table['x2y1'] == player
+	) return true;
+	
+	if ( // making the TOP HORIZONTAL line
+		game.table['x0y2'] == player
+							&&
+		game.table['x1y2'] == player
+							&&
+		game.table['x2y2'] == player
+	) return true;
+	
+	
+	// VERTICAL LINES
+	if ( // making the BOTTOM VERTICAL line
+		game.table['x0y0'] == player
+							&&
+		game.table['x0y1'] == player
+							&&
+		game.table['x0y2'] == player
+	) return true;
+	
+	if ( // making the MIDDLE VERTICAL line
+		game.table['x1y0'] == player
+							&&
+		game.table['x1y1'] == player
+							&&
+		game.table['x1y2'] == player
+	) return true;
+	
+	if ( // making the TOP VERTICAL line
+		game.table['x2y0'] == player
+							&&
+		game.table['x2y1'] == player
+							&&
+		game.table['x2y2'] == player
+	) return true;
+
+	
+	// DIAGONAL LINES
+	if ( // making the LEFT RIGHT ASC line
+		game.table['x0y0'] == player
+							&&
+		game.table['x1y1'] == player
+							&&
+		game.table['x2y2'] == player
+	) return true;
+	
+	if ( // making the LEFT RIGHT DESC line
+		game.table['x0y2'] == player
+							&&
+		game.table['x1y1'] == player
+							&&
+		game.table['x2y0'] == player
+	) return true;
+	
+}
+
+function checkDraw(game) {
+	
+}
+
 
 exports.newGame = function(req, res, next) {
 	var game = gameFactory();
@@ -121,12 +199,28 @@ exports.movement = function(req, res, next) {
 	
 	
 	// Cheking if current player has won
-	// n < 5 não é necessário
+	if ( checkWinner(game) ) {
+		res.json({
+			msg: 'Partida finalizada',
+			winner: game.previousPlayer
+		});
+		return;
+	}
 	
 	
 	
 	// Check if game finished by draw
+	if ( checkDraw(game) ) {
+		res.json({
+			status: 'Partida finalizada',
+			winner: 'Draw'
+		});
+		return;
+	}
 	
-	res.json(game);
+	
+	// Returning the current game object for client	
+	res.status(200).end();
+	//res.json(game);
 	return;
 }
