@@ -21,12 +21,12 @@
 
 <body onload="newGame()">
 	<div class="center">
-		<h1>Tic Tac Toe Testing Front-end</h1>
+		<h1 style="text-align: center">Tic Tac Toe Testing Front-end</h1>
 		GameId: <span id="gameId"></span>,
 		First Player: <span id="firstPlayer"></span><br>
 		<br>
 		<hr>
-	</div>	
+	</div>
 
 	<table class="center">
 		<tbody>
@@ -46,6 +46,12 @@
 				<td><button class="movementButton" data-x="2", data-y="0" onclick="doMovement(this)"></button></td>			</tr>
 		</tbody>
 	</table>
+	
+	<br>
+	<div class="center">
+		Response Code: <span id="responseCode"></span>
+		Response Data: <span id="responseData"></span>
+	</div>
 
 	<script src="/jquery-3.4.1.min.js"></script>
 	<script>
@@ -70,12 +76,28 @@
 			var y = $(elm).attr("data-y");
 
 			$(elm).html(currentPlayer);
+
+			var postUrl = "/game/" + window.game.id + "/movement";
 			
-			if ( currentPlayer == 'X' ) currentPlayer = 'O'
-			else currentPlayer = 'X';
+			var postData = {
+				"id" : window.game.id,
+				"player": window.currentPlayer,
+				"position": {
+					"x": x,
+					"y": y
+				}
+			}
+
+			$.post(postUrl, postData, function(data, txtStatus, xhr) {				
+				$("#responseCode").html(xhr.status + " - " + txtStatus);
+				$("#responseData").html(data);
+				
+				if ( window.currentPlayer == 'X' ) window.currentPlayer = 'O'
+				else window.currentPlayer = 'X';
+			});			
 		}
 	</script>
 
-
+	
 </body>
 </html>
