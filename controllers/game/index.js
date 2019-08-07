@@ -7,6 +7,8 @@ function gameFactory() {
 	var game = {};
 	game.id = uuidv4();
 	game.firstPlayer = (Math.random() < 0.5 ? 'X' : 'O');
+	game.previousPlayer = null;
+	game.nextPlayer = game.firstPlayer;
 	game.table = {
 		x0y2: null,
 		x1y2: null,
@@ -50,28 +52,33 @@ exports.movement = function(req, res, next) {
 		return;
 	}
 	
-	if ( player != 'X' or player != 'O' ) {
-		res.status(500).json({msg: 'Player must be O or X'});
+	if ( player != 'X' && player != 'O' ) {
+		res.status(500).json({msg: 'Jogador deve ser X ou O, recebido: ' + player});
+		return;
+	}
+	
+	if ( player != game.nextPlayer ) {
+		res.status(500).json({msg: 'Não é turno do jogador'});
 		return;
 	}
 	
 	if ( x > 2 ) {
-		res.status(500).json({msg: 'O valor de x deve ser menor ou igual a 2');
+		res.status(500).json({msg: 'O valor de x deve ser menor ou igual a 2, recebido: ' + x});
 		return;		
 	}
 	
 	if ( y > 2 ) {
-		res.status(500).send('O valor de y deve ser menor ou igual a 2');
+		res.status(500).json({msg: 'O valor de y deve ser menor ou igual a 2, recebido:' + y});
 		return;		
 	}
 	
 	if ( x < 0 ) {
-		res.status(500).send('O valor de x deve ser maior que 0');
+		res.status(500).json({msg: 'O valor de x deve ser maior que 0, recebido: ' + x});
 		return;		
 	}
 	
 	if ( y < 0 ) {
-		res.status(500).send('O valor de y deve ser maior que 0');
+	res.status(500).json({msg: 'O valor de y deve ser maior que 0, recebido: ' + y});
 		return;		
 	}
 	
