@@ -49,8 +49,8 @@
 	
 	<br>
 	<div class="center">
-		Response Code: <span id="responseCode"></span>
-		Response Data: <span id="responseData"></span>
+		Response: <span id="responseCode"></span>
+		<pre id="responseData"></pre>
 	</div>
 
 	<script src="/jquery-3.4.1.min.js"></script>
@@ -90,7 +90,7 @@
 
 			$.post(postUrl, postData, function(data, txtStatus, xhr) {				
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
-				$("#responseData").html(data);
+				$("#responseData").html(JSON.stringify(data, null, 4));
 				
 				if ( window.currentPlayer == 'X' ) window.currentPlayer = 'O'
 				else window.currentPlayer = 'X';
