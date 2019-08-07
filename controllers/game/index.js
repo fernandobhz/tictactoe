@@ -119,7 +119,11 @@ function checkDraw(game) {
 exports.newGame = function() {
 	var game = gameFactory();
 	games.push(game);
-  return game;
+	
+  return {
+		id: game.id, 
+		firstPlayer: game.firstPlayer
+	};
 }
 
 exports.listGames = function() {

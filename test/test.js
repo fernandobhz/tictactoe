@@ -16,14 +16,15 @@ function excludeElement(arr, elm) {
 }
 
 describe('New Game', function () {
-	it('Shoud return the start object with id and firstPlayer', function () {
+	it('Shoud return the game object with id and firstPlayer', function () {
 		const game = gc.newGame();
-
-		expect(game).to.be.object;
-		expect(game.id.length).to.be.equal(36);
-		expect(game.firstPlayer).to.be(['X', 'O']);		
+		
+		expect(game).to.be.an('object');
+		expect(game).to.have.all.keys('id', 'firstPlayer');		
+		expect(game.id.length).to.be.equal(36);		
+		expect(['X', 'O']).to.include(game.firstPlayer);		
 	});
-
+/*
 	it('Shoud return the object after ther first movement', function () {
 		const game = gc.newGame();
 
@@ -31,9 +32,10 @@ describe('New Game', function () {
 		// id ser de 36 caracteres
 		// firstPlayer ser X ou O
 	});
+	*/
 
 });
-
+/*
 describe('Missing API field', function () {
 	it('Should warning about the wrong player turn ', function () {
 		const game = gc.newGame();
@@ -211,3 +213,4 @@ describe('Gaming simulation', function () {
 	});
 
 });
+*/
