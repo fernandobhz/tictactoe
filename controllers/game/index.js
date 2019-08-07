@@ -116,29 +116,21 @@ function checkDraw(game) {
 }
 
 
-exports.newGame = function(req, res, next) {
+exports.newGame = function() {
 	var game = gameFactory();
 	games.push(game);
-  res.json(game);
+  return game;
 }
 
-exports.listGames = function(req, res, next) {
-  res.json(games);
+exports.listGames = function() {
+  return games;
 }
 
-exports.movement = function(req, res, next) {
+exports.movement = function(id, player, x, y) {
 	// Received parameters
 	var { id, player, position } = req.body;
 	var { x, y } = position;
 	
-	
-	
-	// Validations
-	if ( id != req.params.id ) {
-		res.status(500).json({msg: 'O ID do jogo na url não corresponde ao ID passado na corpo da requisição'});
-		return;
-	}
-
 	var game = games.find(x => x.id == req.params.id);
 
 	if ( ! game ) {
