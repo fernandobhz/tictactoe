@@ -55,6 +55,11 @@ function doMovement(elm) {
 			location.reload();
 		};
 		
+		if ( data.status == 'Partida finalizada' ) {
+			alert('Empate');
+			location.reload();
+		};
+		
 		$("#nextPlayer").html(data.nextPlayer);
 		if ( data.nextPlayer == 'X' ) {
 			$("#nextPlayer").css('color', 'red');
