@@ -132,7 +132,7 @@ describe('Invalid values field on API call', function () {
 });
 
 
-describe('Gaming simulation', function () {
+describe('Gaming simulation, we will testing all games possibilities (9*8*7*6*5*3*2*1), this will take a while....... a long while........ please wait', function () {
 
 	it('Should return a successfull firstPlayer winner', function () {
 		const game = gc.newGame();
@@ -174,8 +174,8 @@ describe('Gaming simulation', function () {
 		expect(ret.status).to.be.equals('Partida finalizada');
 		expect(ret.winner).to.be.equals('Draw');	
 	});
-
-	it('Should not return exceptions, making all possibles games... this will take a while....... a long while....', function () {
+	
+	it('Should not return exceptions, all possibles games', function () {
 		// Doing all possible games player		
 		
 		const p1 = [
