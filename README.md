@@ -36,3 +36,8 @@ Existe um teste especial que iterará todas as possibilidades de jogos do jogo d
 https://gitlab.com/fernandobhz/tictactoe
 
 Aqui poderá ver todos os commits e tempo gasto em cada fase do desenvolvimento.
+
+# tempo de desenvolvimento
+
+Aproximadamente 12 horas.
+
