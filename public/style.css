@@ -1,0 +1,21 @@
+.movementButton {
+	width: 100%;
+	height: 20vh;
+	font-weight: bold;
+	font-size: 18pt;
+	font-color: blue;
+}
+
+td {
+	width: 30%
+}
+
+.center {
+	width: 80%;
+	margin: 0 auto;
+}
+
+#nextPlayerBox {
+	margin-left: 300px;
+	font-weight: bold;
+}
