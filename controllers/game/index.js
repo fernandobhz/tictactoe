@@ -142,10 +142,16 @@ exports.movement = function(id, player, x, y) {
 	if ( ! player )
 		throw new Error('player faltando');
 
-	if ( ! ['0','1','2'].includes(x) )
+	if ( x == null ) 
+		throw new Error('x faltando ou incorreto');
+	
+	if ( ! ['0','1','2'].includes(x.toString()) )
 		throw new Error('x faltando ou incorreto');
 
-	if ( ! ['0','1','2'].includes(y) )
+	if ( y == null ) 
+		throw new Error('y faltando ou incorreto');
+	
+	if ( ! ['0','1','2'].includes(y.toString()) )
 		throw new Error('y faltando ou incorreto');
 	
 
