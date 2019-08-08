@@ -132,7 +132,7 @@ describe('Invalid values field on API call', function () {
 });
 
 
-describe('Gaming simulation, we will testing all games possibilities (9*8*7*6*5*3*2*1), this will take a while....... a long while........ please wait', function () {
+describe('Gaming simulation, we will testing all games possibilities (9*8*7*6*5*4*3*2*1), this will take a while....... a long while........ please wait', function () {
 
 	it('Should return a successfull firstPlayer winner', function () {
 		const game = gc.newGame();
