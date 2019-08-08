@@ -154,11 +154,29 @@ describe('Gaming simulation', function () {
 	
 	it('Should return a successfull Draw', function () {
 		const game = gc.newGame();
+		const anotherPlayer = (game.firstPlayer == 'X' ? 'O' : 'X')		
+		
+		gc.movement(game.id, game.firstPlayer, 0, 0);
+		gc.movement(game.id, anotherPlayer, 1, 0);
+		
+		gc.movement(game.id, game.firstPlayer, 0, 1);
+		gc.movement(game.id, anotherPlayer, 1, 1);
+		
+		gc.movement(game.id, game.firstPlayer, 1, 2);
+		gc.movement(game.id, anotherPlayer, 0, 2)
+						
+		gc.movement(game.id, game.firstPlayer, 2, 0);
+		gc.movement(game.id, anotherPlayer, 2, 1)
+		var ret = gc.movement(game.id, game.firstPlayer, 2, 2);				
+		
+		expect(ret).to.be.an('object');
+		expect(ret).to.have.all.keys('status', 'winner');
+		expect(ret.status).to.be.equals('Partida finalizada');
+		expect(ret.winner).to.be.equals('Draw');	
 	});
 
-	it('Should not return exceptions, making all possibles games', function () {
-		// Doing all possible games player
-		return;
+	it('Should not return exceptions, making all possibles games... this will take a while....... a long while....', function () {
+		// Doing all possible games player		
 		
 		const p1 = [
 			{x: 0, y: 2},
