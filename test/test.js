@@ -30,15 +30,6 @@ describe('New Game', function () {
 		gc.movement(game.id, game.firstPlayer, 0, 0);
 	});
 	
-	it('Should warning about the WRONG PLAYER TURN ', function () {
-		const game = gc.newGame();
-		
-		expect(function() {
-			gc.movement(game.id, (game.firstPlayer == 'X' ? 'O' : 'X'), 0, 0);
-		}).to.throw('Não é turno do jogador');
-		
-	});
-
 });
 
 describe('Missing API field', function () {
@@ -78,42 +69,68 @@ describe('Missing API field', function () {
 
 });
 
-/*
+
 describe('Invalid values field on API call', function () {
 	it('Should warning about the wrong id / missing game', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(null, game.firstPlayer, 0, 0);
+		}).to.throw('id faltando');
+		
+		expect(function() {
+			gc.movement(123, game.firstPlayer, 0, 0);
+		}).to.throw('id tamanho invalido');				
+		
 	});
 
-	it('Should warning about the wrong player value', function () {
+	it('Should warning about the WRONG PLAYER TURN ', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, (game.firstPlayer == 'X' ? 'O' : 'X'), 0, 0);
+		}).to.throw('Não é turno do jogador');
+		
 	});
 
 	it('Should warning about the wrong x position less then 0', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, game.firstPlayer, -5, 0);
+		}).to.throw('O valor de x deve ser maior que 0, recebido: -5')
+		
 	});
 
 	it('Should warning about the wrong y position less then 0', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, game.firstPlayer, 0, -5);
+		}).to.throw('O valor de y deve ser maior que 0, recebido: -5')
+		
 	});
 
 	it('Should warning about the wrong x position greater than then 2', function () {
 		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, game.firstPlayer, 5, 0);
+		}).to.throw('O valor de x deve ser menor ou igual a 2, recebido: 5')
+		
 	});
 
 	it('Should warning about the wrong y position greater than then 2', function () {
 		const game = gc.newGame();
-	});
-
-	it('Should warning about the wrong x values like lettes, special chars', function () {
-		const game = gc.newGame();
-	});
-
-	it('Should warning about the wrong y values like lettes, special chars', function () {
-		const game = gc.newGame();
+		
+		expect(function() {
+			gc.movement(game.id, game.firstPlayer, 0, 5);
+		}).to.throw('O valor de y deve ser menor ou igual a 2, recebido: 5')
+		
 	});
 
 });
-
+/*
 describe('Gaming simulation', function () {
 
 	it('Should return a successfull X winner', function () {
