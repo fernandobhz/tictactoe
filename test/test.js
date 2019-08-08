@@ -227,33 +227,56 @@ describe('Gaming simulation', function () {
 										for ( var i9 = 0; i9 < p9.length; i9++ ) {
 											var v9 = p9[i9];
 
+											console.log(v1.x, v1.y);
+											console.log(v2.x, v2.y);
+											console.log(v3.x, v3.y);
+											console.log(v4.x, v4.y);
+											console.log(v5.x, v5.y);
+											console.log(v6.x, v6.y);
+											console.log(v7.x, v7.y);
+											console.log(v8.x, v8.y);
+											console.log(v9.x, v9.y);
+
 											var game = gc.newGame();
-
+											game.player = game.firstPlayer;
+	
+											// 1st impossible to win
 											gc.movement(game.id, game.player, v1.x, v1.y)
-											game.player = (player == 'X' ? 'O' : 'X');
+											game.player = (game.player == 'X' ? 'O' : 'X');
 
+											// 2nd impossible to win
 											gc.movement(game.id, game.player, v2.x, v2.y)
-											game.player = (player == 'X' ? 'O' : 'X');
+											game.player = (game.player == 'X' ? 'O' : 'X');
 
+											// 3rd impossible to win
 											gc.movement(game.id, game.player, v3.x, v3.y)
-											game.player = (player == 'X' ? 'O' : 'X');
+											game.player = (game.player == 'X' ? 'O' : 'X');
 
+											// 4th impossible to win
 											gc.movement(game.id, game.player, v4.x, v4.y)
-											game.player = (player == 'X' ? 'O' : 'X');
+											game.player = (game.player == 'X' ? 'O' : 'X');
 
-											gc.movement(game.id, game.player, v5.x, v5.y)
-											game.player = (player == 'X' ? 'O' : 'X');
+											// 5th POSSIBLE to win
+											var ret = gc.movement(game.id, game.player, v5.x, v5.y)
+											if ( ret.msg == 'Partida finalizada' ) continue;
+											game.player = (game.player == 'X' ? 'O' : 'X');											
+											
+											
+											var ret = gc.movement(game.id, game.player, v6.x, v6.y)
+											if ( ret.msg == 'Partida finalizada' ) continue;
+											game.player = (game.player == 'X' ? 'O' : 'X');
+											
+											var ret = gc.movement(game.id, game.player, v7.x, v7.y)
+											if ( ret.msg == 'Partida finalizada' ) continue;
+											game.player = (game.player == 'X' ? 'O' : 'X');
 
-											gc.movement(game.id, game.player, v6.x, v6.y)
-											game.player = (player == 'X' ? 'O' : 'X');
+											var ret = gc.movement(game.id, game.player, v8.x, v8.y)
+											if ( ret.msg == 'Partida finalizada' ) continue;
+											game.player = (game.player == 'X' ? 'O' : 'X');
 
-											gc.movement(game.id, game.player, v7.x, v7.y)
-											game.player = (player == 'X' ? 'O' : 'X');
-
-											gc.movement(game.id, game.player, v8.x, v8.y)
-											game.player = (player == 'X' ? 'O' : 'X');
-
-											gc.movement(game.id, game.player, v9.x, v9.y)											
+											var ret = gc.movement(game.id, game.player, v9.x, v9.y);
+											if ( ret.msg == 'Partida finalizada' ) continue;											
+											//throw Error('Stop on first to test the test');
 										}
 									}
 								}
