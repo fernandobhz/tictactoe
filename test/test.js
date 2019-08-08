@@ -131,18 +131,27 @@ describe('Invalid values field on API call', function () {
 
 });
 
-/*
+
 describe('Gaming simulation', function () {
 
-	it('Should return a successfull X winner', function () {
+	it('Should return a successfull firstPlayer winner', function () {
 		const game = gc.newGame();
-		gc.movement(game.id, game.firstPlayer, 0, 5);	
+		const anotherPlayer = (game.firstPlayer == 'X' ? 'O' : 'X')		
+		
+		gc.movement(game.id, game.firstPlayer, 0, 0);
+		gc.movement(game.id, anotherPlayer, 1, 0);
+		
+		gc.movement(game.id, game.firstPlayer, 0, 1);
+		gc.movement(game.id, anotherPlayer, 1, 1);
+		
+		var ret = gc.movement(game.id, game.firstPlayer, 0, 2);
+		
+		expect(ret).to.be.an('object');
+		expect(ret).to.have.all.keys('msg', 'winner');
+		expect(ret.msg).to.be.equals('Partida finalizada');
+		expect(ret.winner).to.be.equals(game.firstPlayer);				
 	});
-
-	it('Should return a successfull O winner', function () {
-		const game = gc.newGame();
-	});
-
+	
 	it('Should return a successfull Draw', function () {
 		const game = gc.newGame();
 	});
@@ -240,4 +249,3 @@ describe('Gaming simulation', function () {
 	});
 
 });
-*/
