@@ -129,6 +129,15 @@
 			}).fail(function(xhr, txtStatus, error) {
 				$("#responseCode").html(xhr.status + " - " + txtStatus);
 				$("#responseData").html(JSON.stringify(xhr.responseJSON, null, 4) + xhr.responseText);				
+				
+				try {				
+					if ( xhr.responseJSON.msg == 'Esta jogada já foi feita, contate o suporte do front-end' ) {						
+						alert("Recebemos a informação do back-end que essa jogada já foi feita, iremos reiniciar o jogo");
+						location.reload();
+					}
+				} catch(ex) {
+					//nothing to do here
+				}
 			});
 		}
 	</script>
