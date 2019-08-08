@@ -1,7 +1,9 @@
 # Tic Tac Toe Testing for DTI
 
+Fernando Reis Guimarães
+
 # Requisitos
-* Node Version 8 ou maior.
+* Node, Versão 8 ou maior.
 
 # Instalação das dependências
 ```
@@ -14,7 +16,7 @@ npm start
 ```
 
 # Como usar
-Apesar de não solicitado, desenvolvi um front-end bem simples
+Apesar de não solicitado, desenvolvi um front-end extremamente simples
 para testar a api, basta acessar o browser em http://localhost:3000
 
 # Testando
@@ -22,11 +24,12 @@ para testar a api, basta acessar o browser em http://localhost:3000
 npm test
 ```
 
-Existe um teste especial que iterará todas as possibilidades de jogos do jogo da velha (9*8*7*6*5*4*3*2*1), entretanto o mesmo encontra-se desabilitado, para não causar estranheza. Caso desejem ativar, comentar o a linha abaixo.
+Existe um teste especial que iterará todas as possibilidades de jogos do jogo da velha, entretanto o mesmo encontra-se desabilitado, para não causar estranheza. Caso deseje ativar, comentar o a linha abaixo.
 
 ```js
-	it('Should not return exceptions, all possibles games', function () {
-		return; // <<<<<<<<<<<<<<<<<		
+	it('All possibles games', function () {		
+		console.log('All possible games is disabled, because, that will take too long time.');
+		return; // <<<<<<<<<<<<<<<<<	
 ```
 
 # git

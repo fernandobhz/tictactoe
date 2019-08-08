@@ -18,34 +18,34 @@ function excludeElement(arr, elm) {
 describe('New Game', function () {
 	it('Shoud return the GAME OBJECT WITH ID AND FIRSTPLAYER', function () {
 		const game = gc.newGame();
-		
+
 		expect(game).to.be.an('object');
-		expect(game).to.have.all.keys('id', 'firstPlayer');		
-		expect(game.id.length).to.be.equal(36);		
-		expect(['X', 'O']).to.include(game.firstPlayer);		
+		expect(game).to.have.all.keys('id', 'firstPlayer');
+		expect(game.id.length).to.be.equal(36);
+		expect(['X', 'O']).to.include(game.firstPlayer);
 	});
 
 	it('Shoud NOT THROW EXCEPTION ON FIRST MOVEMENT', function () {
 		const game = gc.newGame();
 		gc.movement(game.id, game.firstPlayer, 0, 0);
 	});
-	
+
 });
 
 describe('Missing API field', function () {
-	
+
 	it('Should warning about the MISSING ID field', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(null, game.firstPlayer, 0, 0);
 		}).to.throw('id faltando');
-		
+
 	});
 
 	it('Should warning about the MISSING PLAYER field', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, null, 0, 0);
 		}).to.throw('player faltando');
@@ -53,7 +53,7 @@ describe('Missing API field', function () {
 
 	it('Should warning about the MISSING X position field', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, null, 0);
 		}).to.throw('x faltando ou incorreto');
@@ -61,7 +61,7 @@ describe('Missing API field', function () {
 
 	it('Should warning about the MISSING Y position field', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 0, null);
 		}).to.throw('y faltando ou incorreto');
@@ -73,60 +73,60 @@ describe('Missing API field', function () {
 describe('Invalid values field on API call', function () {
 	it('Should warning about the wrong id / missing game', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(null, game.firstPlayer, 0, 0);
 		}).to.throw('id faltando');
-		
+
 		expect(function() {
 			gc.movement(123, game.firstPlayer, 0, 0);
-		}).to.throw('id tamanho invalido');				
-		
+		}).to.throw('id tamanho invalido');
+
 	});
 
 	it('Should warning about the WRONG PLAYER TURN ', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, (game.firstPlayer == 'X' ? 'O' : 'X'), 0, 0);
 		}).to.throw('Não é turno do jogador');
-		
+
 	});
 
 	it('Should warning about the wrong X POSITION LESS THEN 0', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, -5, 0);
 		}).to.throw('x faltando ou incorreto')
-		
+
 	});
 
 	it('Should warning about the wrong Y POSITION LESS THEN 0', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 0, -5);
 		}).to.throw('y faltando ou incorreto')
-		
+
 	});
 
 	it('Should warning about the wrong X POSITION GREATER THAN THEN 2', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 5, 0);
 		}).to.throw('x faltando ou incorreto')
-		
+
 	});
 
 	it('Should warning about the wrong Y POSITION GREATER THAN THEN 2', function () {
 		const game = gc.newGame();
-		
+
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 0, 5);
 		}).to.throw('y faltando ou incorreto')
-		
+
 	});
 
 });
@@ -136,50 +136,50 @@ describe('Gaming simulation', function () {
 
 	it('Should return a successfull firstPlayer winner', function () {
 		const game = gc.newGame();
-		const anotherPlayer = (game.firstPlayer == 'X' ? 'O' : 'X')		
-		
+		const anotherPlayer = (game.firstPlayer == 'X' ? 'O' : 'X')
+
 		gc.movement(game.id, game.firstPlayer, 0, 0);
 		gc.movement(game.id, anotherPlayer, 1, 0);
-		
+
 		gc.movement(game.id, game.firstPlayer, 0, 1);
 		gc.movement(game.id, anotherPlayer, 1, 1);
-		
+
 		var ret = gc.movement(game.id, game.firstPlayer, 0, 2);
-		
+
 		expect(ret).to.be.an('object');
 		expect(ret).to.have.all.keys('msg', 'winner');
 		expect(ret.msg).to.be.equals('Partida finalizada');
-		expect(ret.winner).to.be.equals(game.firstPlayer);				
+		expect(ret.winner).to.be.equals(game.firstPlayer);
 	});
-	
+
 	it('Should return a successfull Draw', function () {
 		const game = gc.newGame();
-		const anotherPlayer = (game.firstPlayer == 'X' ? 'O' : 'X')		
-		
+		const anotherPlayer = (game.firstPlayer == 'X' ? 'O' : 'X')
+
 		gc.movement(game.id, game.firstPlayer, 0, 0);
 		gc.movement(game.id, anotherPlayer, 1, 0);
-		
+
 		gc.movement(game.id, game.firstPlayer, 0, 1);
 		gc.movement(game.id, anotherPlayer, 1, 1);
-		
+
 		gc.movement(game.id, game.firstPlayer, 1, 2);
 		gc.movement(game.id, anotherPlayer, 0, 2)
-						
+
 		gc.movement(game.id, game.firstPlayer, 2, 0);
 		gc.movement(game.id, anotherPlayer, 2, 1)
-		var ret = gc.movement(game.id, game.firstPlayer, 2, 2);				
-		
+		var ret = gc.movement(game.id, game.firstPlayer, 2, 2);
+
 		expect(ret).to.be.an('object');
 		expect(ret).to.have.all.keys('status', 'winner');
 		expect(ret.status).to.be.equals('Partida finalizada');
-		expect(ret.winner).to.be.equals('Draw');	
+		expect(ret.winner).to.be.equals('Draw');
 	});
-	
-	it('Should not return exceptions, all possibles games', function () {		
+
+	it('All possibles games', function () {
 		console.log('All possible games is disabled, because, that will take too long time.');
 		return; // <<<<<<<<<<<<<<<<<
-		
-		// Doing all possible games player		
+
+		// Doing all possible games player
 		const p1 = [
 			{x: 0, y: 2},
 			{x: 1, y: 2},
@@ -228,10 +228,10 @@ describe('Gaming simulation', function () {
 
 										for ( var i9 = 0; i9 < p9.length; i9++ ) {
 											var v9 = p9[i9];
-											
+
 											var game = gc.newGame();
 											game.player = game.firstPlayer;
-	
+
 											// 1st impossible to win
 											gc.movement(game.id, game.player, v1.x, v1.y)
 											game.player = (game.player == 'X' ? 'O' : 'X');
@@ -251,13 +251,13 @@ describe('Gaming simulation', function () {
 											// 5th POSSIBLE to win
 											var ret = gc.movement(game.id, game.player, v5.x, v5.y)
 											if ( ret.msg == 'Partida finalizada' ) continue;
-											game.player = (game.player == 'X' ? 'O' : 'X');											
-											
-											
+											game.player = (game.player == 'X' ? 'O' : 'X');
+
+
 											var ret = gc.movement(game.id, game.player, v6.x, v6.y)
 											if ( ret.msg == 'Partida finalizada' ) continue;
 											game.player = (game.player == 'X' ? 'O' : 'X');
-											
+
 											var ret = gc.movement(game.id, game.player, v7.x, v7.y)
 											if ( ret.msg == 'Partida finalizada' ) continue;
 											game.player = (game.player == 'X' ? 'O' : 'X');
@@ -267,7 +267,7 @@ describe('Gaming simulation', function () {
 											game.player = (game.player == 'X' ? 'O' : 'X');
 
 											var ret = gc.movement(game.id, game.player, v9.x, v9.y);
-											if ( ret.msg == 'Partida finalizada' ) continue;											
+											if ( ret.msg == 'Partida finalizada' ) continue;
 											//throw Error('Stop on first to test the test');
 										}
 									}
