@@ -34,3 +34,5 @@ Existe um teste especial que iterará todas as possibilidades de jogos do jogo d
 
 # git
 https://gitlab.com/fernandobhz/tictactoe
+
+Aqui poderá ver todos os commits e tempo gasto em cada fase do desenvolvimento.
