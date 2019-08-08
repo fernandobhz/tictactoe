@@ -100,6 +100,7 @@ function checkWinner(game) {
 		game.table['x2y0'] == player
 	) return true;
 
+	return false;
 }
 
 function checkDraw(game) {
