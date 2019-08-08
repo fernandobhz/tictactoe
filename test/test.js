@@ -226,17 +226,7 @@ describe('Gaming simulation', function () {
 
 										for ( var i9 = 0; i9 < p9.length; i9++ ) {
 											var v9 = p9[i9];
-
-											console.log(v1.x, v1.y);
-											console.log(v2.x, v2.y);
-											console.log(v3.x, v3.y);
-											console.log(v4.x, v4.y);
-											console.log(v5.x, v5.y);
-											console.log(v6.x, v6.y);
-											console.log(v7.x, v7.y);
-											console.log(v8.x, v8.y);
-											console.log(v9.x, v9.y);
-
+											
 											var game = gc.newGame();
 											game.player = game.firstPlayer;
 	

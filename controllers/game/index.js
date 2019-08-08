@@ -131,7 +131,7 @@ exports.listGames = function() {
 }
 
 exports.movement = function(id, player, x, y) {
-console.log(id, player, x, y);
+	
 	// validation of input values
 	if ( ! id )
 		throw new Error('id faltando');
