@@ -132,7 +132,7 @@ describe('Invalid values field on API call', function () {
 });
 
 
-describe('Gaming simulation, we will testing all games possibilities (9*8*7*6*5*4*3*2*1), this will take a while....... a long while........ please wait', function () {
+describe('Gaming simulation', function () {
 
 	it('Should return a successfull firstPlayer winner', function () {
 		const game = gc.newGame();
@@ -176,6 +176,7 @@ describe('Gaming simulation, we will testing all games possibilities (9*8*7*6*5*
 	});
 	
 	it('Should not return exceptions, all possibles games', function () {		
+		console.log('All possible games is disabled, because, that will take too long time.');
 		return; // <<<<<<<<<<<<<<<<<
 		
 		// Doing all possible games player		
