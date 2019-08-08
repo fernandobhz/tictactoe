@@ -93,48 +93,50 @@ describe('Invalid values field on API call', function () {
 		
 	});
 
-	it('Should warning about the wrong x position less then 0', function () {
+	it('Should warning about the wrong X POSITION LESS THEN 0', function () {
 		const game = gc.newGame();
 		
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, -5, 0);
-		}).to.throw('O valor de x deve ser maior que 0, recebido: -5')
+		}).to.throw('x faltando ou incorreto')
 		
 	});
 
-	it('Should warning about the wrong y position less then 0', function () {
+	it('Should warning about the wrong Y POSITION LESS THEN 0', function () {
 		const game = gc.newGame();
 		
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 0, -5);
-		}).to.throw('O valor de y deve ser maior que 0, recebido: -5')
+		}).to.throw('y faltando ou incorreto')
 		
 	});
 
-	it('Should warning about the wrong x position greater than then 2', function () {
+	it('Should warning about the wrong X POSITION GREATER THAN THEN 2', function () {
 		const game = gc.newGame();
 		
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 5, 0);
-		}).to.throw('O valor de x deve ser menor ou igual a 2, recebido: 5')
+		}).to.throw('x faltando ou incorreto')
 		
 	});
 
-	it('Should warning about the wrong y position greater than then 2', function () {
+	it('Should warning about the wrong Y POSITION GREATER THAN THEN 2', function () {
 		const game = gc.newGame();
 		
 		expect(function() {
 			gc.movement(game.id, game.firstPlayer, 0, 5);
-		}).to.throw('O valor de y deve ser menor ou igual a 2, recebido: 5')
+		}).to.throw('y faltando ou incorreto')
 		
 	});
 
 });
+
 /*
 describe('Gaming simulation', function () {
 
 	it('Should return a successfull X winner', function () {
 		const game = gc.newGame();
+		gc.movement(game.id, game.firstPlayer, 0, 5);	
 	});
 
 	it('Should return a successfull O winner', function () {

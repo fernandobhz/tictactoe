@@ -147,19 +147,7 @@ exports.movement = function(id, player, x, y) {
 
 	if ( ! [0,1,2].includes(y) )
 		throw new Error('y faltando ou incorreto');
-
-	if ( x > 2 )
-		throw new Error('O valor de x deve ser menor ou igual a 2, recebido: ' + x);
-
-	if ( y > 2 )
-		throw new Error('O valor de y deve ser menor ou igual a 2, recebido:' + y);
-
-	if ( x < 0 )
-		throw new Error('O valor de x deve ser maior que 0, recebido: ' + x);
-
-	if ( y < 0 )
-		throw new Error('O valor de y deve ser maior que 0, recebido: ' + y);
-
+	
 
 	// finding game
 	var game = games.find(x => x.id == id);
