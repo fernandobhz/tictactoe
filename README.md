@@ -1,43 +1,33 @@
-# Tic Tac Toe Testing for DTI
+# Tic Tac Toe
 
 Fernando Reis Guimarães
 
 # Requisitos
 * Node, Versão 8 ou maior.
 
-# Instalação das dependências
+# Install the dependencies
 ```
 npm install
 ```
 
-# Execução
+# Execution
 ```
 npm start
 ```
 
-# Como usar
-Apesar de não solicitado, desenvolvi um front-end extremamente simples
-para testar a api, basta acessar o browser em http://localhost:3000
+# How to use
+Access the app in your browser http://localhost:3000
 
-# Testando
+# Testing
 ```
 npm test
 ```
 
-Existe um teste especial que iterará todas as possibilidades de jogos do jogo da velha, entretanto o mesmo encontra-se desabilitado, para não causar estranheza. Caso deseje ativar, comentar o a linha abaixo.
+There is a commented test, that will iterate over all games possibilities.
+It was disabled because it was taking so much time to complete.
 
 ```js
 	it('All possibles games', function () {		
 		console.log('All possible games is disabled, because, that will take too long time.');
 		return; // <<<<<<<<<<<<<<<<<	
 ```
-
-# git
-https://gitlab.com/fernandobhz/tictactoe
-
-Aqui poderá ver todos os commits e tempo gasto em cada fase do desenvolvimento.
-
-# tempo de desenvolvimento
-
-Aproximadamente 12 horas.
-
